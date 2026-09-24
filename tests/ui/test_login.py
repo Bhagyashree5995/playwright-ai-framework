@@ -4,8 +4,7 @@ from conftest import STANDARD_USER, LOCKED_USER, PASSWORD
 def test_valid_login_reaches_inventory(login_page, page):
     login_page.login(STANDARD_USER, PASSWORD)
     assert "inventory.html" in page.url
-    assert page.get_by_text("Products").is_visible()
-
+    assert page.locator('[data-test="title"]').inner_text() == "Products"
 
 def test_invalid_password_shows_error(login_page):
     login_page.login(STANDARD_USER, "wrong_password")
